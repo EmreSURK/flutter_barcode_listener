@@ -78,12 +78,10 @@ class _BarcodeKeyboardListenerState extends State<BarcodeKeyboardListener> {
     //remove any pending characters older than bufferDuration value
     checkPendingCharCodesToClear();
     _lastScannedCharCodeTime = DateTime.now();
-    if (char == lineFeed) {
+    _scannedChars.add(char!);
+    if (  _scannedChars.length == 13 || char == lineFeed) {
       _onBarcodeScannedCallback.call(_scannedChars.join());
       resetScannedCharCodes();
-    } else {
-      //add character to list of scanned characters;
-      _scannedChars.add(char!);
     }
   }
 
